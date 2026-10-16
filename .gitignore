@@ -5,6 +5,8 @@ Screenshot*.png
 ngữ cảnh dự án.txt
 build/
 *.obj
+*.o
+*.exe
 *.pyd
 __pycache__/
 Walkthrough/
