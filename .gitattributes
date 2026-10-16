@@ -1,0 +1,2 @@
+# Mọi file văn bản dùng kiểu xuống dòng LF trong kho, bất kể máy Windows hay Linux.
+* text=auto eol=lf
