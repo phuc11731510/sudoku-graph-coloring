@@ -1,11 +1,8 @@
-# File và thư mục chỉ có trên máy này, không đưa vào kho
 reference/
 thuc-hanh-git/
 .vscode/
 Screenshot*.png
 ngữ cảnh dự án.txt
-
-# File sinh ra khi build (mỗi máy tự build)
 build/
 *.obj
 *.pyd
