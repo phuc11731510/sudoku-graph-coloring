@@ -10,3 +10,4 @@ build/
 *.pyd
 __pycache__/
 Walkthrough/
+uml-engine/
