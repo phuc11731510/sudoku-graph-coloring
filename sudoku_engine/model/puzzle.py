@@ -40,6 +40,7 @@ class Puzzle:
     return Puzzle(tuple(0 for _ in range(81)))
     
   def toString(self) -> str:
+    """Chuyển Puzzle thành chuỗi"""
     res: str = ""
     for s in self.givens:
       if (s != 0): res += str(s)
@@ -47,11 +48,11 @@ class Puzzle:
     return res
   
   def givenAt(self, v: Vertex) -> Color:
+    """Một đỉnh của đề bài có màu là gì"""
     return self.givens[v]
     
   def isGiven(self, v: Vertex) -> bool:
-    """Kiểm tra xem một đỉnh của đề bài có là ô manh mối hay không, \
-      nếu trống thì trả về False, nếu không trống thì trả về True"""
+    """Nếu đỉnh có manh mối thì trả về True"""
     if self.givens[v] != 0: return True
     return False
     
