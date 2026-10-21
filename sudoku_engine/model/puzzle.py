@@ -50,7 +50,8 @@ class Puzzle:
     return self.givens[v]
     
   def isGiven(self, v: Vertex) -> bool:
-    """Kiểm tra xem một đỉnh của đề bài có là ô trống hay không"""
+    """Kiểm tra xem một đỉnh của đề bài có là ô manh mối hay không, \
+      nếu trống thì trả về False, nếu không trống thì trả về True"""
     if self.givens[v] != 0: return True
     return False
     
@@ -66,6 +67,37 @@ class Puzzle:
     new_givens = tuple(self.givens[i] if i != v else c for i in range(81))
     return Puzzle(new_givens)
   
+  
 if __name__ == '__main__':
-  A=Puzzle.fromString("0154441045"*8+'4')
-  print(A.toString())
+  SAMPLE = ("53..7...." "6..195..." ".98....6." "8...6...3" "4..8.3..1"
+            "7...2...6" ".6....28." "...419..5" "....8..79")
+
+  def expect_error(text: str, position: int):
+    try:
+      Puzzle.fromString(text)
+    except PuzzleFormatError as e:
+      assert e.position == position, (text, e.position)
+      return
+    raise AssertionError("Không báo lỗi với: " + repr(text))
+
+  p = Puzzle.fromString(SAMPLE)
+  assert p.toString() == SAMPLE                     # fromString rồi toString
+  assert p.givenCount() == 30
+  assert (p.givenAt(0), p.givenAt(80), p.givenAt(2)) == (5, 9, 0)
+  assert p.isGiven(1) and not p.isGiven(2)
+
+  assert Puzzle.fromString("0" * 81) == Puzzle.empty()
+  assert Puzzle.empty().toString() == "." * 81
+  assert Puzzle.empty().givenCount() == 0
+
+  e = Puzzle.empty()
+  q = e.withGiven(40, 7)
+  assert q.givenAt(40) == 7 and q.givenCount() == 1 and len(q.givens) == 81
+  assert e.givenCount() == 0                        # đề cũ không đổi
+  assert q.withGiven(40, 0) == e
+
+  for bad in ("", "1" * 80, "1" * 82): expect_error(bad, -1)
+  for i, ch in ((0, "x"), (40, " "), (80, "a")):
+    expect_error("." * i + ch + "." * (80 - i), i)
+
+  print("Tất cả phép thử của Puzzle đều qua")

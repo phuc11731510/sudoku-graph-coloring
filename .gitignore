@@ -11,3 +11,5 @@ build/
 __pycache__/
 Walkthrough/
 uml-engine/
+*.py
+!sudoku_engine/**/*.py
