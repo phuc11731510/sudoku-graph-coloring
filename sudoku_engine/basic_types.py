@@ -5,6 +5,8 @@ type CliqueId = int
 type Nanos = int
 type Edge = tuple[Vertex, Vertex]
 
+NO_VERTEX: Vertex = -1
+
 # Hàm để thử type hint
 def neighbors_of(v: Vertex) -> list[Vertex]:
   return None
